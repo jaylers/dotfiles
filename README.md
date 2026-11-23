@@ -2,6 +2,7 @@
 
 - `claude/`: Claude Code status line, settings and CLAUDE.md
 - `ghostty/`: Ghostty terminal config (TokyoNight Night, JetBrainsMono Nerd Font)
+- `zsh/`: .zshrc
 
 ## Install on a new computer
 
