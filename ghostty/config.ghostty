@@ -1,3 +1,4 @@
 # Ghostty default settings, plus a dark background to match the Claude Code theme.
 # The old config is in git history (see: git log -- ghostty/config.ghostty).
 background = #0a0a0f
+font-size = 14
