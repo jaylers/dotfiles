@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code status line (minimal, 2 lines, TokyoNight Night colors)
-#   1: folder · git branch, changes, ahead/behind · lines changed · (right) CPU, RAM
+#   1: folder · git branch, changes, ahead/behind · lines changed · (right) CPU, RAM, battery
 #   2: model · effort · context · plan usage (5-hour and weekly limits) · (right) git author
 input=$(cat)
 
@@ -102,6 +102,12 @@ mem=$(vm_stat 2>/dev/null | awk -v total="$(sysctl -n hw.memsize 2>/dev/null)" -
 right=""
 [ -n "$cpu" ] && right="${muted}CPU${r} $(color "$cpu")$cpu%${r}"
 [ -n "$mem" ] && right="${right:+$right  }${muted}RAM${r} $(color "$mem")$mem%${r}"
+# Battery (none on desktop Macs): red < 20%, yellow < 50%, else green
+batt=$(pmset -g batt 2>/dev/null | grep -o '[0-9]*%' | head -1 | tr -d %)
+if [ -n "$batt" ]; then
+  if [ "$batt" -lt 20 ]; then bc=$red; elif [ "$batt" -lt 50 ]; then bc=$yellow; else bc=$green; fi
+  right="${right:+$right  }${muted}BAT${r} $bc$batt%${r}"
+fi
 
 # Right side of line 2: the git author for this repository
 author=$(git -C "$dir" config user.name 2>/dev/null)
