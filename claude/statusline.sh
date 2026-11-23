@@ -107,8 +107,7 @@ right=""
 author=$(git -C "$dir" config user.name 2>/dev/null)
 email=$(git -C "$dir" config user.email 2>/dev/null)
 right2=""
-ul=$(printf '\033[4m'); noul=$(printf '\033[24m')
-[ -n "$author" ] && right2="${muted}author:${r} ${blue}${ul}$author${noul}${r}"
+[ -n "$author" ] && right2="${muted}author:${r} ${blue}$author${r}"
 [ -n "$email" ] && right2="${right2:-${muted}author:${r}} ${muted}<$email>${r}"
 
 # The script has no terminal of its own, so ask the terminal of Claude Code (a parent process)
