@@ -6,3 +6,7 @@ grammar or wording mistakes, add a short section at the end of your reply:
 
 Show only the corrected sentence. Do not explain the mistakes.
 If the message is already correct, skip this section.
+
+## Reply style
+Keep replies short. Use simple English: short sentences and common words.
+Avoid jargon; if a technical word is needed, explain it in a few words.
