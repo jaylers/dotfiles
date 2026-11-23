@@ -21,5 +21,6 @@
       "effortLevel": "medium"
     }
   },
-  "theme": "custom:modern-dark"
+  "theme": "auto",
+  "useAutoModeDuringPlan": true
 }
