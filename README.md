@@ -1,6 +1,7 @@
 # dotfiles
 
-Claude Code config: status line, settings and CLAUDE.md.
+- `claude/`: Claude Code status line, settings and CLAUDE.md
+- `ghostty/`: Ghostty terminal config (TokyoNight Night, JetBrainsMono Nerd Font)
 
 ## Install on a new computer
 
@@ -10,3 +11,4 @@ git clone https://github.com/jaylers/dotfiles.git ~/dotfiles
 ```
 
 The status line needs `jq` (`brew install jq`).
+The Ghostty config needs JetBrainsMono Nerd Font (`brew install --cask font-jetbrains-mono-nerd-font`).

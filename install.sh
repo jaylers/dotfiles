@@ -1,12 +1,21 @@
 #!/bin/bash
-# Link the Claude Code config in this repo into ~/.claude
+# Link the config in this repo into place
 # Existing files are kept as <name>.backup
 set -e
 repo=$(cd "$(dirname "$0")" && pwd)
-mkdir -p ~/.claude
+
+# link <file in repo> <target path>
+link() {
+  mkdir -p "$(dirname "$2")"
+  [ -e "$2" ] && [ ! -L "$2" ] && mv "$2" "$2.backup"
+  ln -sfn "$repo/$1" "$2"
+  echo "linked $2"
+}
+
+# Claude Code
 for f in statusline.sh settings.json CLAUDE.md; do
-  target=~/.claude/$f
-  [ -e "$target" ] && [ ! -L "$target" ] && mv "$target" "$target.backup"
-  ln -sfn "$repo/claude/$f" "$target"
-  echo "linked $target"
+  link "claude/$f" ~/.claude/$f
 done
+
+# Ghostty
+link ghostty/config.ghostty "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
