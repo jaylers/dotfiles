@@ -16,6 +16,7 @@ link() {
 for f in statusline.sh settings.json CLAUDE.md; do
   link "claude/$f" ~/.claude/$f
 done
+link claude/themes ~/.claude/themes
 
 # Ghostty
 link ghostty/config.ghostty "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"

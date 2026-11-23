@@ -1,0 +1,22 @@
+{
+  "name": "Modern Dark",
+  "base": "dark",
+  "overrides": {
+    "text": "#e4e4e7",
+    "subtle": "#52525b",
+    "inactive": "#71717a",
+    "claude": "#a78bfa",
+    "claudeShimmer": "#c4b5fd",
+    "permission": "#22d3ee",
+    "permissionShimmer": "#67e8f9",
+    "suggestion": "#22d3ee",
+    "promptBorder": "#3f3f46",
+    "promptBorderShimmer": "#71717a",
+    "bashBorder": "#f472b6",
+    "userMessageBackground": "#1f1b2e",
+    "userMessageBackgroundHover": "#28233b",
+    "bashMessageBackgroundColor": "#1a1a22",
+    "memoryBackgroundColor": "#132a30",
+    "selectionBg": "#3b2f5c"
+  }
+}
