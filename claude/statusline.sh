@@ -53,6 +53,23 @@ effort=$(j '.effort.level')
 [ -n "$effort" ] && line2="$line2 ${yellow}⚡$effort${r}"
 line2="$line2 ${muted}ctx${r} $(color "$pct")$pct%${r}"
 
+# Tokens used by the last prompt: ↑ new input (not counting cache reads), ↓ output
+transcript=$(j '.transcript_path')
+if [ -f "$transcript" ]; then
+  turn=$(tail -n 3000 "$transcript" | jq -Rnr '
+    [inputs | fromjson?] as $all
+    | ([$all | to_entries[] | select(.value.type == "user" and (.value.message.content
+        | (type == "string") or (type == "array" and any(.[]; .type == "text")))) | .key] | last) as $start
+    | [$all[($start // 0):][] | select(.type == "assistant" and .message.usage)]
+    | group_by(.message.id) | map(last.message.usage)
+    | "\(map((.input_tokens // 0) + (.cache_creation_input_tokens // 0)) | add // 0) \(map(.output_tokens // 0) | add // 0)"' 2>/dev/null)
+  k() { awk -v n="$1" 'BEGIN { if (n >= 1000) printf "%.1fk", n / 1000; else printf "%d", n }'; }
+  if [ -n "$turn" ]; then
+    tin=${turn% *}; tout=${turn#* }
+    line2="$line2 ${muted}tokens${r} ${fg}↑$(k "$tin") ↓$(k "$tout")${r}"
+  fi
+fi
+
 added=$(j '.cost.total_lines_added'); removed=$(j '.cost.total_lines_removed')
 [ -n "$added$removed" ] && line="$line${sep}${muted}change:${green}+${added:-0}${muted}/${red}-${removed:-0}${r}"
 
